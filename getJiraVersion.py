@@ -1,7 +1,8 @@
 from urllib.request import urlopen
+from packaging.version import parse
 from atlasUtil import loadsJsonp
-from atlasUtil import findLatestLongTermRelease
 from atlasUtil import convertListDate
+from atlasUtil import findLatestEnterpriseRelease
 
 #https://www.atlassian.com/software/jira/update
 
@@ -9,7 +10,7 @@ from atlasUtil import convertListDate
 #### Properties
 ##########################################################################
 jsonurl="https://my.atlassian.com/download/feeds/current/jira-software.json"
-longTermRelease=9.4
+currentInstalledJiraVersion="9.4.4"
 
 ##########################################################################
 #### Script Run
@@ -22,6 +23,17 @@ json_list=loadsJsonp(json_str)
 convertListDate(json_list, '%d-%b-%Y')
 
 print('#################################################################################')
-print(json_list)
-print("Latest Release: " + findLatestLongTermRelease(json_list, longTermRelease))
+#### Debug Info print(json_list)
+currentAtlassianEnterpriseVersion = findLatestEnterpriseRelease(json_list)
+print("Latest Confluence Enterprise(LTS) Release: " + currentAtlassianEnterpriseVersion)
 print('#################################################################################')
+
+parsedAtlasVersion =  parse(currentAtlassianEnterpriseVersion) 
+parsedInstalledVersion = parse(currentInstalledJiraVersion)
+
+
+if parsedInstalledVersion < parsedAtlasVersion:
+    print('There is a new Version available:' + currentAtlassianEnterpriseVersion)
+    exit(1)
+else:
+    exit(0)

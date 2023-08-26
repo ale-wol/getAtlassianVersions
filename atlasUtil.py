@@ -32,6 +32,19 @@ def findLatestRelease(json_list):
             youngestVersion=i['version']
     return youngestVersion
 
+def findLatestEnterpriseRelease(json_list):
+    youngestVersion = None
+    youngestVersionReleased = datetime.time(0,0,0)
+    for i in json_list:
+        if(i['edition']=="Enterprise"):
+            if(youngestVersion is None):
+                youngestVersion=i['version']
+                youngestVersionReleased=i['released']
+            elif(youngestVersionReleased < i['released']):
+                youngestVersionReleased=i['released']
+                youngestVersion=i['version']
+    return youngestVersion
+
 def findLatestLongTermRelease(json_list, longTermRelease):
     lts_json_list=list()
     youngestLtsVersion=None
