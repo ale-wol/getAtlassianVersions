@@ -37,9 +37,13 @@ currentAtlassianEnterpriseVersion = findLatestEnterpriseRelease(json_list)
 print("Latest Confluence Enterprise(LTS) Release: " + currentAtlassianEnterpriseVersion)
 print('#################################################################################')
 
+
+##########################################################################
+#### Return Code Handling
+##########################################################################
+
 parsedAtlasVersion =  parse(currentAtlassianEnterpriseVersion) 
 parsedInstalledVersion = parse(currentInstalledConfluenceVersion)
-
 
 if parsedInstalledVersion < parsedAtlasVersion:
     print('There is a new Version available:' + currentAtlassianEnterpriseVersion)
