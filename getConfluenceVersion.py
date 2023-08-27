@@ -2,8 +2,6 @@ from urllib.request import urlopen
 from packaging.version import parse
 from atlasUtil import loadsJsonp
 from atlasUtil import convertListDate
-from atlasUtil import findLatestRelease
-from atlasUtil import findLatestLongTermRelease
 from atlasUtil import findLatestEnterpriseRelease
 
 #Current Versions Confluence
